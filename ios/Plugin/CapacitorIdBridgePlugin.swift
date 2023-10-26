@@ -9,10 +9,14 @@ import Capacitor
 public class CapacitorIdBridgePlugin: CAPPlugin {
     private let implementation = CapacitorIdBridge()
 
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.resolve([
-            "value": implementation.echo(value)
+    @objc func setNativeID(_ call: CAPPluginCall) {
+        let id = call.getString("id") ?? ""
+        
+        // Saving the ID to UserDefaults
+        UserDefaults.standard.setValue(id, forKey: "CustomElement_NativeID")
+        
+        call.success([
+            "message": "ID received and saved: \(id)"
         ])
     }
 }

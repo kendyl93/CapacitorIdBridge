@@ -22,4 +22,15 @@ class CapacitorIdBridgeTests: XCTestCase {
 
         XCTAssertEqual(value, result)
     }
+
+    func setAccessibilityIdentifier() {
+    // Retrieve the saved ID from UserDefaults
+    if let savedID = UserDefaults.standard.string(forKey: "CustomElement_NativeID") {
+        
+        // Find the XCUIElementTypeStaticText element you want to assign the ID to
+        let app = XCUIApplication()
+        let staticText = app.staticTexts["The current static text's accessibility identifier or label"]
+        staticText.accessibilityIdentifier = savedID
+    }
+}
 }
